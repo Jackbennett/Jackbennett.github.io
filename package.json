@@ -1,0 +1,22 @@
+{
+  "name": "jackben.net",
+  "version": "0.0.0",
+  "description": "Home Site",
+  "main": "gulp.js",
+  "dependencies": {
+    "gulp": "^3.8.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.2",
+    "gulp-connect": "^2.0.5",
+    "gulp-stylus": "^1.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Jack Bennett",
+  "license": "ISC"
+}
