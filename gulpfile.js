@@ -17,12 +17,13 @@ gulp.task('html', function () {
 gulp.task('stylus', function () {
   gulp.src('./www/stylus/*.styl')
     .pipe(stylus())
-    .pipe(gulp.dest('./www/css'))
+    .pipe(gulp.dest('./www/css/compiled'))
     .pipe(connect.reload());
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./app/*.html'], ['html']);
+  gulp.watch(['./www/*.html'], ['html']);
+  gulp.watch(['./www/stylus/*.styl'], ['stylus']);
 });
 
 gulp.task('default', ['stylus', 'connect', 'watch']);

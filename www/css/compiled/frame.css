@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Homestead';
+  font-style: 'Normal';
+  src: url("/font/Homestead-inline.ttf");
+}
+@font-face {
+  font-family: 'Homestead-one';
+  font-style: 'Normal';
+  src: url("/font/Homestead-one.ttf");
+}
+@font-face {
+  font-family: 'Homestead-two';
+  font-style: 'Normal';
+  src: url("/font/Homestead-two.ttf");
+}
+@font-face {
+  font-family: 'Homestead-three';
+  font-style: 'Normal';
+  src: url("/font/Homestead-three.ttf");
+}
+body {
+  background: #f9f6e7;
+}
+.header-container header {
+  position: relative;
+  display: block;
+}
+.title {
+  width: 1254px;
+  position: relative;
+  font: 190px Homestead, mono;
+  color: #493a2c;
+}
+.title::before,
+.title::after {
+  content: attr(text);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.title::before {
+  font-family: Homestead-two;
+  color: #808c42;
+}
+.title::after {
+  font-family: Homestead-three;
+  color: #96c040;
+}

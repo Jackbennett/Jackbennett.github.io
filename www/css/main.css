@@ -83,16 +83,6 @@ body {
     border-top: 20px solid #e44d26;
 }
 
-.header-container,
-.footer-container,
-.main aside {
-    background: #f16529;
-}
-
-.title {
-    color: white;
-}
-
 /* ==============
     MOBILE: Menu
    ============== */
