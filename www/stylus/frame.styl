@@ -15,20 +15,22 @@ font-face(name, style, url)
   font-face 'Homestead-three', 'Normal', '/font/Homestead-three.ttf'
 
 .header-container
-  margin 230px 0
-  overflow hidden
+  height 100vh
+  margin 0
+  position relative
 
-  h1
-    width 50%
+  .masthead
     margin 0
-    float left
-    position relative
     display block
+    position absolute
+    right 51%
+    bottom 0
     text-align right
 
   nav
-    width 50%
-    float right
+    position absolute
+    top 25%
+    left 51%
 
 .main-container
   width 720px
@@ -54,10 +56,7 @@ font-face(name, style, url)
       left w*.1
 
 .masthead
-  scale = 1900
-  width (scale * 0.66)px
-  position relative
-  font (scale/10)px Homestead, mono
+  font 150px Homestead, mono
   color dark
   &::before,&::after
     content attr(text)
