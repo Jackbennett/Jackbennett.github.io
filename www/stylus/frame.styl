@@ -4,6 +4,7 @@ font-face(name, style, url)
   src url(url)
 
 @import "theme/colours-default"
+@import "theme/style-default"
 
 @font-face
   font-face 'Homestead', 'Normal', '/font/Homestead-inline.ttf'
@@ -13,6 +14,13 @@ font-face(name, style, url)
   font-face 'Homestead-two', 'Normal', '/font/Homestead-two.ttf'
 @font-face
   font-face 'Homestead-three', 'Normal', '/font/Homestead-three.ttf'
+
+.main
+  h1,h2,h3,h4,h5,h6
+    margin 0 -30px
+    font-family Homestead, Serif
+    border-bottom 1px solid dark
+    color dark
 
 .header-container
   height 100vh
