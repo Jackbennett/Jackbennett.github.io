@@ -4,7 +4,6 @@ font-face(name, style, url)
   src url(url)
 
 @import "theme/colours-default"
-@import "theme/style-default"
 
 @font-face
   font-face 'Homestead', 'Normal', '/font/Homestead-inline.ttf'
@@ -16,7 +15,10 @@ font-face(name, style, url)
   font-face 'Homestead-three', 'Normal', '/font/Homestead-three.ttf'
 
 .main
+  width 780px
   min-height 100vh
+  margin 0 auto
+
   h1,h2,h3,h4,h5,h6
     margin 0
     font-family Homestead, Serif
@@ -39,11 +41,6 @@ font-face(name, style, url)
   nav
     position absolute
     left 51%
-
-.main-container
-  width 780px
-  min-height 100vh
-  margin 0 auto
 
 article
   overflow auto
@@ -74,6 +71,15 @@ article
     text-decoration none
     font 3vw Homestead
     border-top-right-radius 25px 50px
+    border 1px solid dark
+    color dark
+
+    &:nth-child(1):hover
+      background-image url("../../img/pattern1.png")
+    &:nth-child(2):hover
+      background-image url("../../img/pattern2.png")
+    &:nth-child(3):hover
+      background-image url("../../img/pattern3.png")
 
     span
       position absolute
