@@ -17,7 +17,7 @@ font-face(name, style, url)
 
 .main
   h1,h2,h3,h4,h5,h6
-    margin 0 -30px
+    margin 0
     font-family Homestead, Serif
     border-bottom 1px solid dark
     color dark
@@ -44,9 +44,22 @@ font-face(name, style, url)
   min-height 100vh
   margin 0 auto
 
-.main
-  margin: 0 30px
+article
+  margin 0 30px
 
+.column
+  overflow auto
+  .col
+    padding 0 1em
+    box-sizing border-box
+    display block
+    float left
+  &.two
+    .col
+      width 50%
+  &.three
+    .col
+      width 33.2%
 
 .tile
   margin 7.5vh 0 10vh
