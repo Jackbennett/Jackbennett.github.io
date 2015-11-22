@@ -16,7 +16,6 @@ font-face(name, style, url)
   font-face 'Homestead-three', 'Normal', '/font/Homestead-three.ttf'
 
 .main
-  min-height 100vh
   h1,h2,h3,h4,h5,h6
     margin 0
     font-family Homestead, Serif
@@ -40,7 +39,7 @@ font-face(name, style, url)
     position absolute
     left 51%
 
-.main-container
+.main
   width 780px
   min-height 100vh
   margin 0 auto
@@ -94,3 +93,8 @@ article
   &::after
     font-family Homestead-three
     color light
+
+a[href='#none']
+  cursor default
+  &:hover
+    background inherit
