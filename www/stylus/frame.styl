@@ -3,6 +3,8 @@ font-face(name, style, url)
   font-style style
   src url(url)
 
+contentWidth = 780px
+
 @import "theme/colours-default"
 
 @font-face
@@ -39,13 +41,17 @@ font-face(name, style, url)
     left 51%
 
 .main
-  width 780px
+  width contentWidth
   min-height 100vh
   margin 0 auto
 
 article
   overflow auto
   margin 0 30px
+
+footer
+  text-align center
+  margin 20px auto 0
 
 .column
   overflow auto
@@ -101,6 +107,9 @@ article
   &::after
     font-family Homestead-three
     color light
+
+.logo
+  width 10vw
 
 a[href='#none']
   cursor default
