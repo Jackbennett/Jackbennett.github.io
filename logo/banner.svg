@@ -1,0 +1,13 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  viewBox="0 10 442 170">
+  <style type="text/css">
+    text {
+      font: 100px 'Homestead Display';
+      fill: #493a2c;
+    }
+  </style>
+  <text y="80px" x="187">Jack</text>
+  <text y="180px">Bennett</text>
+</svg>

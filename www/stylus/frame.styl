@@ -8,18 +8,13 @@ contentWidth = 780px
 @import "theme/colours-default"
 
 @font-face
-  font-face 'Homestead', 'Normal', '/font/Homestead-inline.ttf'
-@font-face
-  font-face 'Homestead-one', 'Normal', '/font/Homestead-one.ttf'
-@font-face
-  font-face 'Homestead-two', 'Normal', '/font/Homestead-two.ttf'
-@font-face
-  font-face 'Homestead-three', 'Normal', '/font/Homestead-three.ttf'
+  font-face 'Novecento', 'Normal', '/font/Novecento/Novecentoslabwide-Normal-webfont.woff'
 
 .main
   h1,h2,h3,h4,h5,h6
     margin 0
-    font-family Homestead, Serif
+    font-family Novecento, Serif
+    font-weight 900
     border-bottom 1px solid dark
     color dark
 
@@ -30,6 +25,7 @@ contentWidth = 780px
 
   .masthead
     margin 10vh 0
+    width 45vw
     display block
     position absolute
     right 51%
@@ -76,7 +72,7 @@ footer
     margin 2.5vh 0 0
     position relative
     text-decoration none
-    font 3vw Homestead
+    font 3vw Novecento
     border-top-right-radius 25px 50px
     border 1px solid dark
     color dark
@@ -92,21 +88,6 @@ footer
       position absolute
       bottom w*.1
       left w*.1
-
-.masthead
-  font 10vw Homestead, Monospace
-  color dark
-  &::before,&::after
-    content attr(text)
-    position absolute
-    top 0
-    left 0
-  &::before
-    font-family Homestead-two
-    color off
-  &::after
-    font-family Homestead-three
-    color light
 
 .logo
   width 10vw
