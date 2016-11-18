@@ -25,6 +25,9 @@ contentWidth = 780px
 
 webfont('Novecento', 'Novecento/Novecentoslabwide-Normal-webfont', false)
 
+body
+  line-height 1.4em
+
 .main
   h1,h2,h3,h4,h5,h6
     margin 0
@@ -105,6 +108,20 @@ footer
 
 .logo
   width 10vw
+
+.split-background-line
+  position: relative
+  margin 40px 0
+  &::before
+    content ""
+    display block
+    width 0
+    height 105%
+    position absolute
+    left 50%
+    top -5%
+    border-right 2px dashed dark
+    opacity 0.35
 
 a[href='#none']
   cursor default
