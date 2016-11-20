@@ -30,10 +30,26 @@ body
 
 .main
   h1,h2,h3,h4,h5,h6
-    margin 0
+    margin .5em 0 0
+    line-height 1.6em
     font-family 'Novecento', Serif
     border-bottom 1px solid dark
     color dark
+
+h1,h2,h3,h4,h5,h6
+  a
+    display block
+    position relative
+    margin-left 1em;
+    text-decoration none
+    color off
+    &::before
+      content "\000BB"
+      position absolute
+      left -1em
+
+    &:hover
+      color light
 
 .header-container
   height 100vh
@@ -59,7 +75,7 @@ body
   margin 0 auto
 
 article
-  overflow auto
+  display inline-block
   margin 0 30px
 
 footer
