@@ -19,21 +19,22 @@ webfont(family, file, hack-chrome-windows = false, weight = 'normal')
         font-family family
         src url(font-url(file + '.svg#'+ family)) format('svg')
 
-contentWidth = 780px
-
-@import "theme/colours-default"
+// pallet
+bg = #f9f6e7
+// bg = #E1EF91
+dark = #493A2C
+light = #96C040
+off = #808C42
 
 webfont('Novecento', 'Novecento/Novecentoslabwide-Normal-webfont', false)
 
 body
-  line-height 1.4em
-
-.main
-  h1,h2,h3,h4,h5,h6
-    margin .5em 0 0
-    border-bottom 1px solid dark
+  line-height 1.55em
+  background bg
 
 h1,h2,h3,h4,h5,h6
+  margin .5em 0 0
+  border-bottom 1px dashed dark
   color dark
   font-family 'Novecento', Serif
   line-height 1.6em
@@ -49,6 +50,20 @@ h1,h2,h3,h4,h5,h6
       left -1em
     &:hover
       color light
+
+h1
+  padding-left 1vw
+  border-bottom-style: solid;
+h2
+  padding-left 2vw
+h3
+  padding-left 3vw
+h4
+  padding-left 4vw
+h5
+  padding-left 5vw
+h6
+  padding-left 6vw
 
 .header-container
   height 100vh
@@ -67,21 +82,38 @@ h1,h2,h3,h4,h5,h6
     line-height 8vw
 
   nav
+    height 100%
     position absolute
     left 51%
 
 .main
-  width contentWidth
   min-height 100vh
-  margin 0 auto
+  margin 0 5vw
 
 article
   display inline-block
-  margin 0 30px
+  width 100%
+  >*
+    margin-left auto
+    margin-right auto
+  p,ol
+    max-width 40em
+
+.hug
+  margin-bottom -.5em
 
 footer
   text-align center
   margin 20px auto 0
+
+.column-flex
+  display flex
+  justify-content center
+  flex-wrap wrap
+  >div,>pre
+    margin-left 2vw
+  >div:first-child,>pre:first-child
+    margin-left 0
 
 .column
   overflow auto
@@ -98,17 +130,22 @@ footer
       width 33.2%
 
 .tile
-  margin 7.5vh 0 10vh
+  display flex
+  flex-direction column
+  align-items center
   a
-    display block
-    width w = 30vw
-    height 25vh
-    margin 2.5vh 0 0
+    display flex
+    align-items flex-end
+    flex 1
+    width 30vw
+    margin 2.5vh 0
+    padding .4em;
     position relative
     text-decoration none
     font 3vw Novecento
-    border-top-right-radius 25px 50px
+    // border-top-right-radius 25px 50px
     border 1px solid dark
+    border-top-width 10px
     color dark
 
     &:nth-child(1):hover
@@ -117,17 +154,79 @@ footer
       background-image url("../../img/pattern2.png")
     &:nth-child(3):hover
       background-image url("../../img/pattern3.png")
+    &:nth-child(4):hover
+      background-image url("../../img/pattern4.png")
 
-    span
-      position absolute
-      bottom w*.1
-      left w*.1
+.small-header
+  padding 1vw
+  display flex
+  align-self center
+  justify-content center
+
+.small-header
+  .tile
+    display flex
+    flex-direction row
+    align-self center
+    justify-content center
+
+  img
+    flex 1
+    min-width 100px
+    margin-right 2vw
+
+.small-header .tile
+  flex 6
+  margin 0
+  a
+    display inline-block
+    width auto
+    flex 1
+    margin .5vh 0 0
+    font-size 2vw
+    border-left-width 0
+
+    &:nth-child(1)
+      border-left-width 1px
+  .active
+    border-bottom 0
+
+tr
+  vertical-align top
+  border-left 1px solid dark
+  border-bottom 1px solid dark
+  &:first-child
+    border-top 1px solid dark
+  &:hover
+    background-color light
+  :first-child
+    vertical-align middle
+    text-align center
+  td,th
+    padding .2em .8em
+    border-right 1px solid dark
+  td[colspan]
+    text-align center
+
+.code-responsive
+  font-family monospace,serif
+code
+  min-width 15em
+  position: relative
+  &[data-lang]
+    padding-top 1.5em !important
+  &::before
+    content attr(data-lang)
+    position absolute
+    top 0
+    left 0
+    font-family 'Novecento', Serif
 
 .logo
   width 10vw
 
 .split-background-line
-  position: relative
+  position relative
   margin 40px 0
   &::before
     content ""
@@ -144,3 +243,7 @@ a[href='#none']
   cursor default
   &:hover
     background inherit
+
+@media print
+  .small-header
+    display none
