@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
   stylus = require('gulp-stylus'),
-  connect = require('gulp-connect');
+  connect = require('gulp-connect'),
+  markdown = require('gulp-markdown');
 
 gulp.task('connect', function() {
   connect.server({
@@ -19,6 +20,12 @@ gulp.task('stylus', function () {
     .pipe(stylus())
     .pipe(gulp.dest('./www/css/compiled'))
     .pipe(connect.reload());
+});
+
+gulp.task('markdown', function () {
+    return gulp.src('src/*.md')
+        .pipe(markdown())
+        .pipe(gulp.dest('www/blog'));
 });
 
 gulp.task('watch', function () {
