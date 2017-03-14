@@ -1,0 +1,373 @@
+@font-face {
+    font-family: 'Novecento';
+    font-weight: 'normal';
+    font-style: normal;
+    src: url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.eot");
+    src: url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.eot?#iefix") format('embedded-opentype'), url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.woff2") format('woff2'), url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.woff") format('woff'), url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.ttf") format('truetype'), url("/assets/font/Novecento/Novecentoslabwide-Normal-webfont.svg#Novecento") format('svg');
+}
+
+body {
+    line-height: 1.55em;
+    background: #f9f6e7;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0.5em 0 0;
+    border-bottom: 1px dashed #493a2c;
+    color: #493a2c;
+    font-family: 'Novecento', Serif;
+    line-height: 1.6em;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+    display: block;
+    position: relative;
+    margin-left: 1em;
+    text-decoration: none;
+    color: #808c42;
+}
+
+h1 a::before,
+h2 a::before,
+h3 a::before,
+h4 a::before,
+h5 a::before,
+h6 a::before {
+    content: "\000BB";
+    position: absolute;
+    left: -1em;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+    color: #96c040;
+}
+
+h1 {
+    padding-left: 1vw;
+    border-bottom-style: solid;
+}
+
+h2 {
+    padding-left: 2vw;
+}
+
+h3 {
+    padding-left: 3vw;
+}
+
+h4 {
+    padding-left: 4vw;
+}
+
+h5 {
+    padding-left: 5vw;
+}
+
+h6 {
+    padding-left: 6vw;
+}
+
+.header-container {
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+.header-container .masthead {
+    margin: 10vh 0;
+    width: 40vw;
+    display: block;
+    position: absolute;
+    right: 51%;
+    bottom: 0;
+    text-align: right;
+    font-size: 5vw;
+    line-height: 8vw;
+}
+
+.header-container nav {
+    height: 100%;
+    position: absolute;
+    left: 51%;
+}
+
+.main {
+    min-height: 100vh;
+    margin: 0 5vw;
+}
+
+article {
+    display: inline-block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+article>* {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+article p,
+article ol {
+    max-width: 40em;
+}
+
+.hug {
+    margin-bottom: -0.5em;
+}
+
+footer {
+    text-align: center;
+    margin: 20px auto 0;
+}
+
+.column-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+.column-flex>div,
+.column-flex>pre {
+    margin-left: 2vw;
+}
+
+.column-flex>div:first-child,
+.column-flex>pre:first-child {
+    margin-left: 0;
+}
+
+.column {
+    overflow: auto;
+}
+
+.column .col {
+    padding: 0 1em;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+}
+
+.column.two .col {
+    width: 50%;
+}
+
+.column.three .col {
+    width: 33.2%;
+}
+
+.tile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.tile a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    width: 30vw;
+    margin: 2.5vh 0;
+    padding: 0.4em;
+    position: relative;
+    text-decoration: none;
+    font: 3vw Novecento;
+    border: 1px solid #493a2c;
+    border-top-width: 10px;
+    color: #493a2c;
+}
+
+.tile a:nth-child(1):hover {
+    background-image: url("/assets/img/pattern1.png");
+}
+
+.tile a:nth-child(2):hover {
+    background-image: url("/assets/img/pattern2.png");
+}
+
+.tile a:nth-child(3):hover {
+    background-image: url("/assets/img/pattern3.png");
+}
+
+.tile a:nth-child(4):hover {
+    background-image: url("/assets/img/pattern4.png");
+}
+
+.small-header {
+    padding: 1vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.small-header .tile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.small-header img {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    min-width: 80px;
+    margin-right: 2vw;
+}
+
+.small-header .tile {
+    -webkit-box-flex: 6;
+        -ms-flex: 6;
+            flex: 6;
+    margin: 0;
+}
+
+.small-header .tile a {
+    display: inline-block;
+    width: auto;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    margin: 0.5vh 0 0;
+    font-size: 2vw;
+    border-left-width: 0;
+}
+
+.small-header .tile a:nth-child(1) {
+    border-left-width: 1px;
+}
+
+.small-header .tile .active {
+    border-bottom-color: #f9f6e7;
+}
+
+tr {
+    vertical-align: top;
+    border-left: 1px solid #493a2c;
+    border-bottom: 1px solid #493a2c;
+}
+
+tr:first-child {
+    border-top: 1px solid #493a2c;
+}
+
+tr:hover {
+    background-color: #96c040;
+}
+
+tr :first-child {
+    vertical-align: middle;
+    text-align: center;
+}
+
+tr td,
+tr th {
+    padding: 0.2em 0.8em;
+    border-right: 1px solid #493a2c;
+}
+
+tr td[colspan] {
+    text-align: center;
+}
+
+.code-responsive {
+    font-family: monospace, serif;
+}
+
+code {
+    min-width: 15em;
+    position: relative;
+}
+
+code[data-lang] {
+    padding-top: 1.5em !important;
+}
+
+code::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'Novecento', Serif;
+}
+
+.logo {
+    width: 10vw;
+}
+
+.split-background-line {
+    position: relative;
+    margin: 40px 0;
+}
+
+.split-background-line::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 105%;
+    position: absolute;
+    left: 50%;
+    top: -5%;
+    border-right: 2px dashed #493a2c;
+    opacity: 0.35;
+}
+
+a[href='#none'] {
+    cursor: default;
+}
+
+a[href='#none']:hover {
+    background: inherit;
+}
+
+@media print {
+    .small-header {
+        display: none;
+    }
+}
