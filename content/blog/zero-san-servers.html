@@ -1,0 +1,42 @@
+---
+draft: true
+title: Zero SAN Servers
+---
+<h1>Zero SAN Servers</h1>
+<h2>Deploying redundant shared services on the cheap without a SAN</h2>
+<p>This post aims to detail a method used to provide services to users/clients that are not interrupted by something as trivial as server reboots or power outages.
+    Before we go into too much detail this is a sea of product names and industry names used as product names.
+    It's worth always reminding yourself of the gaol we're even after?</p>
+<!--remember the goal-->
+<blockquote>Remember The Goal: No Downtime</blockquote>
+<p>In this example I'm going to try to explain the solid underpinnings of a basic but functional network that you could go into the server rack and pull the power from a single host yet nobody would notice.
+    I would define a basic network ans something that provides the following services;
+</p>
+<ol>
+    <li>DHCP - For connectivity</li>
+    <li>DNS - For finding connectivity</li>
+    <li>Active Directory - For multiple user access</li>
+    <li>Shared Storage - For data that users want to save and share.</li>
+</ol>
+
+<!--following the graph-->
+<!--
+C  C  C  Client
+\  |  |  /
+ \ /  \ /
+  V    Virtual
+  |    |
+  S    Server
+  |    |
+  W   sWitch
+  \   /
+   \ /
+    Storage
+-->
+<!--clients-->
+<!--connections-->
+<!--services-->
+<!--guest servers-->
+<!--servers-->
+<!--connections-->
+<!--storage-->

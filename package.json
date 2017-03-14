@@ -5,13 +5,24 @@
   "main": "gulp.js",
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-connect": "^5.0.0",
-    "gulp-markdown": "^1.2.0",
-    "gulp-stylus": "^2.6.0"
+    "handlebars": "^4.0.6",
+    "jstransformer-handlebars": "^1.0.0",
+    "live-server": "^1.2.0",
+    "metalsmith": "^2.3.0",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-autoprefixer": "^1.1.1",
+    "metalsmith-collections": "^0.9.0",
+    "metalsmith-debug": "^1.1.0",
+    "metalsmith-drafts": "0.0.1",
+    "metalsmith-in-place": "^2.0.1",
+    "metalsmith-layouts": "^1.8.0",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-permalinks": "^0.5.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "start": "live-server ./public/"
   },
   "keywords": [
     "portfolio"

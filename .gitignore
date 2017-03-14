@@ -1,5 +1,5 @@
+; managed files
 node_modules/
-www/css/compiled/
 
+; Editor Files
 .vscode/
-*.sublime-workspace
