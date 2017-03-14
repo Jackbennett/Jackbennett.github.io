@@ -22,7 +22,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.js",
-    "start": "live-server ./public/"
+    "start": "live-server ./public/",
+    "deploy": "git subtree push origin master --prefix public\\"
   },
   "keywords": [
     "portfolio"
