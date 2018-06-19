@@ -1,0 +1,70 @@
+---
+title: How to Work in Powershell
+---
+<h1>How To Work <em>In</em> Powershell</h1>
+
+<p>This post is a little different than the normal how to write powershell. I'll cover that too but this is a guide for once you're comfortable knowing some PS, What does it look like to work with it? How does it change you thinking? What new approaches to problems are there?</p>
+
+<h2>The Task</h2>
+<p>You're asked if it's possible to copy a set of lesson materials to all the students folders in a class. I'm sure initial thoughts are;</p>
+<ul>
+  <li>Use the shared drive.</li>
+  <li>Use the shared drive.</li>
+</ul>
+<p>But hey, we know powershell, so this isn't really a big deal;</p>
+
+<pre><code class="lang-powershell" data-lang=powershell>$listOfUsernames | % {cp -Recurse "\\shared\lesson\folder\*" "\\server\users\class\$psitem\lesson6"}</code></pre>
+
+<p>I appreciate filling `$listOFUsernames` isn't necessarily very easy given such a request, that's a good thing to thing about addressing after reading this.
+  If you are new to PS the above is simply shorthand to loop over the contents from $listOfUsernames,
+  for each item in the array run the cp (copy-item) command with the lesson file path and the user area filepath, replacing $psitem with the current item of the loop (the username).</p>
+
+<p>Great, at this point job done. <a href="https://xkcd.com/1205/" title="xkcd: Is it worth the time?">There's always more</a> that can be done though if you think about it, is there any opportunity here to save some work in the future? Perhaps even add value in a new way.</p>
+
+<h2>Have someone else do the work</h2>
+
+<p>It's probably fair to say such a request may come up more often now that you've shown how easy it was.
+  First off let's deal with this user list business, often class lists in school aren't the easiest to get programatically;</p>
+<ol>
+  <li>Inconsistent naming conventions</li>
+  <li>Outdated lists</li>
+  <li>Teacher not knowing exactly the right class name that matches whatever naming scheme you have it saved in</li>
+</ol>
+
+<p>If there's one thing to take from this it's this: Build on whats come before. We've done all this work setting the network for powershell so lets use it.
+  Code Signing allows out scripts to be locked up and ran by anyone i.e. the students themselves. All we need is the script in a shared location, which we run applications from already, great!
+</p>
+
+<pre><code class="lang-powershell" data-lang=powershell># v1 \\server\applications\powershell\start-lesson6.ps1
+
+copy-item -Recurse "\\shared\lesson\folder\*" "H:\Lesson6\" -force}</code></pre>
+
+<p>Any user can call that themselves and get set for the class. Hang on though, now people who don't know what the script does are going to be calling it, so it's on us to be more careful. Currently there's a few issues with this code;</p>
+<ol>
+  <li>`copy-item -force` to create the end folder is going to overwrite those files every time its run!</li>
+  <li>This file is very specific about lesson6 and where it goes</li>
+  <li>Absolutely no useful information is given to the user.</li>
+</ol>
+
+<h2>Coding proactively</h2>
+
+<p>Now that we're leaving PS around to read later (possibly years later) lets help other out now and use the long-form to the cmdlet names for clarity.
+  We'll generalise this script so we can use it in future for something else without having the change it.
+</p>
+
+<pre><code class="lang-powershell" data-lang=powershell># v2 \\server\applications\powershell\start-lesson.ps1
+Param(
+  $Path,
+  $Destination
+)
+new-item -type Directory $Destination -errorAction Stop
+copy-item -Recurse $Path $Destination}</code></pre>
+
+<h2>Reaping the benefits</h2>
+
+<p>Sure enough, the next morning you're told to use different names for the folder and do 3 extra topics for the class. Oh and if possible, in the next hour please.
+  We simply make a few more shortcuts, changing the parameter info.
+  This has already been used a few times, so it's justified to add a little more to the script;
+  Why not handle if the files have already been copied, perhaps write some information to the user.
+</p>
+<p>The script currently in use is <a href="https://github.com/BirkdaleHigh/powershell/blob/master/Start-ClassTopic.ps1" title="Start-ClassTopic">on github here</a>. If you are reading this far, might I point out the <a href="https://github.com/BirkdaleHigh/powershell/commits/master/Start-ClassTopic.ps1" title="file commit history">history tab</a> to review how this has evolved</p>
