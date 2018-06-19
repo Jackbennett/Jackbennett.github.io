@@ -20,7 +20,9 @@ Metalsmith(__dirname)
   .use(drafts())
   .use(collections({
       blog:{
-        pattern:'blog/**/*.html'
+        pattern:'blog/**/*.html',
+        sortBy: 'date',
+        reverse: true
       }
   }))
   .use(permalinks({
