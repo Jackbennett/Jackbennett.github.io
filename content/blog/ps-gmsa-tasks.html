@@ -1,0 +1,108 @@
+---
+title: Powershell Task Image Download
+draft: true
+---
+<p>Lets set the desktop background to a new image of the sun pulled from NASA every day. How hard can it be?</p>
+<p>This post isn't going to be treading any new ground but will serve to compile a bunch of things I've had to find out to get a simple scheduled task running.
+To be honest with you Microsoft, this is far more involved than it should be. But it's nifty non-the-less.</p>
+
+<h2>Concepts Covered</h2>
+<ul>
+    <li>
+        <a href="#scripting" title="Writing A Script">Scripting</a>
+        <a href="#signing" title="Signing A Script">Signing</a>
+        <a href="#schedule" title="Creating A Task">Scheduled Task</a>
+        <a href="#gmsa" title="Making A User">gMSA User</a>
+        <a href="#permission" title="Applying permissions">Permissions</a>
+    </li>
+</ul>
+
+<h2 id="scripting">Scripting</h2>
+<p>For the job of pulling an image from a url to a location on our network there's a surprising number of gotcha's.
+    For style points lets copy the existing background file for historical purposes
+    <small>(this being a daily photo of the sun, I'd quite like to create a gif of the months backgrounds as a header for a newsletter).</small>
+    You can see my actual <a href="https://github.com/BirkdaleHigh/powershell">production file here</a> but the english explanation of it would be;
+</p>
+<ol>
+    <li>Accept a URL to download, defaulting to my chosen background (perks of being the author)</li>
+    <li>Get the filename from the URL for later</li>
+    <li><span class="gotcha">Set powershell to use TLS 1.2</span> for some reason by default the dot net method and Invoke-WebRequest would try, and fail with TLS 1.0 against this url target</li>
+    <li>If the filename exists make a copy appending todays' date.</li>
+    <li>Actually download the image into the <span class="gotcha">full file path</span>. This will replace the image.</li>
+</ol>
+<p>You must use full paths to any file manipulation. Aside from good practice for the sake of clarity this will avoid an error when running the task as the gMSA user.</p>
+<p>I suppose in backing up the file it should use the creation date, but script run date is close enough for me.
+    Unique and ordered was all we're after.</p>
+<p class="caution" title="Caution">Download files from https links. This mitigates a MITM attacker the contents of what is expected to be downloaded</p>
+
+<h3 id="signing">Signing Your Script</h3>
+<p>In short, signing is not as important as it sounds and if this is new ground to you.
+    Don't worry about it, just add the parameter
+    <code class="lang-powershell">-ExecutionPolicy Bypass</code> when creating the Scheduled Task Action arguments.
+    I could (and probably will) write a whole other post about signing code, execution policies and AppLocker but it's not a necessary step right now.
+</p>
+<p class="caution" title="Caution">If you run the task with bypass, heed the caution notes.</p>
+
+<h2 id="schedule">Create A Scheduled Task</h2>
+<p>For now, it's fastest to simply use the GUI and create the task on a target machine. Scheduling the trigger to run daily and the describe the action as follows;</p>
+<dl>
+    <dt>Program</dt>
+    <dd>powershell.exe</dd>
+    <dt>Arguments</dt>
+    <dd>-ExecutionPolicy ByPass -File .\Get-Image.ps1</dd>
+    <dt>Start In</dt>
+    <dd>&lt;Full path to the download directory&gt;</dd>
+</dl>
+
+<p>Create the task as your own user account. This will make initial testing easier to change task settings and re-run.
+    Check that it is running correctly, if not skip down to the debugging section for advice.</p>
+
+<h2 id="gmas">Group Managed Service Account</h2>
+<p>We can't leave the task to run as our account, You won't be logged in all the time and you can't leave the password saved in the task.</p>
+<p>Follow Microsofts' steps if this is your first service account to prepare Active Directory.
+    Then create a user for this task, it would be ideal to have 1 job per user but that can feel like a lot of work to get </p>
+
+<code class="lang-powershell" data-lang="powerhsell">New-ADServiceAccount -Identity FilesTask -DNSHostName &lt;DC&gt; -PrincipalsAllowedToRetrievePassword (Get-AdComputer &lt;server with task scheduled&gt;)</code>
+<p><small>I've chosen a name that indicates this account handles files and executes a scheduled task.
+    It is highly recommended to fill the -Description parameter with as much information as you can.
+    You will thank yourself in 12 months.</small></p>
+
+<p>Then you need to install that service account on the server running the task. <span class="gotcha">Install-ADServiceAccount requires AD cmdlets are installed locally</span>  or you get an error. Not imported from a remote pssession.</p>
+
+<pre><code class="lang-powershell" data-lang="powershell">
+    Install-WindowsFeature RSAT-AD-Powershell
+    Install-ADServiceAccount -Identity FilesTask
+    Test-ADServiceAccount -identity FilesTask
+    # True indicates this server can retrieve the password from AD.
+    # Otherwise this will fail in about a month when the password changes.
+    Remove-WindowsFeature RSAT-AD-Powershell
+
+    # Don't close powershell yet.
+</code></pre>
+
+<p>Finally this service account must be given permission to run scheduled tasks on the computer. I do this by GPO, the setting is <code>Computer Settings > Windows Settings > Security > Local Policy > User Rights Assignmnet > Logon As Batch Job</code> and add the service account identity</p>
+
+<h2 id="permission">Allow NTFS Permissions</h2>
+<p>Now that the task will run as a different identity, it certainly won't be able to change any files.
+    On the folder with the script, which as currently coded is also download directory target, "Allow" "Modify" NTFS rights for "This folder and files"
+</p>
+<p class="caution">It may be possible to replace the script file itself with a maliciously crafted response from the URL. My (not ideal) mitigation to this is code signing. This script should be run from a directory the user doesn't have modify rights to.</p>
+
+<p>By now you must be thinking this is it. But finally finally I'm sure you've noticed the scheduled task is still set to run as yourself, lets change that</p>
+<pre><code class="lang-powershell" data-lang="powershell">
+    Get-ScheduledTask '&lt;Task Name Here&gt;' -outvariable mytask
+    # inspect the output you indeed have the correct task.
+    $mytask.principal
+    # You wil see your current account Settings
+    $t.principal = New-ScheduledTaskPrincipal -identity <span class="gotcha" title="Principals have a dollar $ suffix">'FilesTask$'</span> -AuthType password
+    # this only updates the representation of the scheduled task in memory, now apply it to the actual task
+    $myTask | Set-ScheduledTask
+</code></pre>
+
+<p class="gotcha">This can only be done via powershell. The GUI will give you errors</p>
+<p class="gotcha">Once the user is changed you won't be able to edit settings on the task due to the above error when trying to save changes.</p>
+<p>I suggest the easiest way to edit lots of settings would be to change the task to run back as yourself, make changes and then repeat the above principal setting.
+    This is precisely the kind of stick to drive you into creating/editing scheduled jobs directly. It's not too difficult. </p>
+
+<h2>Closing Remarks</h2>
+<p>There's quite a lot of moving parts to this whole process, much of it also needs repeating for each task you'll want to make in future. Like Accounts, making the tasks itself and that's on top of actually coding a powershell solution in the first place.</p>
