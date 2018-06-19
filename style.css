@@ -366,6 +366,19 @@ a[href='#none']:hover {
     background: inherit;
 }
 
+.caution, .gotcha{
+    margin: inherit auto;
+    padding: .3em 1em;
+    border: 1px solid #493a2c;
+}
+.caution {
+    background: #D3643B;
+}
+
+.gotcha {
+    background: #EDEBE6;
+}
+
 @media print {
     .small-header {
         display: none;
