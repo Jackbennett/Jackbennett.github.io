@@ -1,0 +1,35 @@
+---
+title: Python Strings In Detail
+draft: true
+---
+<article>
+    <h1 id="python-to-javascript"> Python Strings In Detail</h1>
+    <h2 id="category">Self Learning</h2>
+    <p>Learning a programming language can seem intimidating, especially when presented with example after example to plug in to your own computer and move on. </p>
+
+    <p>After some experience in the classroom with python, there are some common areas students can struggle with. Many know code but few have a fluency to experiment and get themselves unstuck.</p>
+
+    <h2 id="code-examples">Step One, Data Types</h2>
+    <p>You'll need something to work with, so why not just a line of text.</p>
+    <div class="column-flex">
+<pre class="col two"><code class="lang-Python" data-lang=python>test = 'example of a string'
+</code></pre>
+    </div>
+        <p>Of course you know to see the contents of test to just print() the variable. That doesn't really tell us anything we didn't already know. So what else? Careful observers will spot there's nothing in that code to actually tell python the type of data that is in test. Time to check that, nice and easy;</p>
+    <div class="column-flex">
+<pre class="col two"><code class="lang-Python" data-lang=python>type(test)
+# &lt;class 'str'&gt;
+</code></pre>
+    </div>
+    <p>Now it's proved test is indeed a string, as shown by <span class="code-responsive">str</span>. Lets try adding a number to the beginning of it to indicate this is the first test. I've done maths, add is a plus (+) so why not give that a go.</p>
+    <div class="column-flex">
+<pre class="col two"><code class="lang-Python" data-lang=python>1 + test
+# TypeError: unsupported operand type(s) for +: 'int' and 'str'
+</code></pre>
+    </div>
+    <p>This error used to be greek, but now you know what types are, and the error talks about types, it's a good place to start looking at the data types in use. The error even helps out here, 'int' and 'str'. </p>
+    <p>The point here is that it's worth having a guess and using your knowledge to try and get the language to tell you the correct answer. As at some point there won't be a perfect written answer to your question if you are looking for a reference.</p>
+    <p>Even getting this wrong a few times was still faster than trying to search for "How to combine two strings in python". The first answer probably wouldn't mention both arguments need to be strings, instead just showing you the operand to use. It might not be the same version of python even if it is a correct answer.</p>
+    <p>Have a go.</p>
+
+</article>

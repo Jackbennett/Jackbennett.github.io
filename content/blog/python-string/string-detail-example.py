@@ -1,8 +1,4 @@
-﻿---
-draft: true
----
-
-# Learning python by one tiny peice at a time.
+﻿# Learning python by one tiny peice at a time.
 
 # concerns about areas of programming/python that more than one person hasn't been aware of.
 # Written from basic to advanced although really everyone should get this.
@@ -66,6 +62,7 @@ def scopeBExample():
 
 print(name) # global
 scopeAExample() # scopeA
+print(name) # global
 scopeBExample() # scopeB
 print(name) # scopeB
 # -------------------
